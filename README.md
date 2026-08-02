@@ -21,7 +21,7 @@ per 1,000 people.** Pick them by "who is likely to leave" and you get 32. So
 response works nearly 5 times better.
 
 But there is a catch. The people who respond most are the people who spend
-least — ₽18,279 average spend in the safest group against ₽2,024 in the
+least, ₽18,279 average spend in the safest group against ₽2,024 in the
 riskiest.
 
 So if you count money instead of purchases, it flips. Picking by response ×
@@ -55,7 +55,7 @@ This creates two problems.
 
 **There is no churn label.** You cannot train a model to predict something your
 data does not record. And a fixed rule like "90 days inactive" fails
-immediately — a weekly shopper silent for a month is at risk, a quarterly
+immediately, a weekly shopper silent for a month is at risk, a quarterly
 shopper silent for a month is behaving normally.
 
 **You cannot verify that retention spending works.** Customers who accept offers
