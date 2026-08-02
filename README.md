@@ -3,6 +3,10 @@
 Finding customers who quietly stop buying, and working out which ones are worth
 spending money on.
 
+**[→ Open the live app](https://retention-targeting.streamlit.app)**  
+Set a budget, get a ranked targeting list, and find where the campaign stops
+being profitable.
+
 ---
 
 ## The main finding
