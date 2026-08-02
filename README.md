@@ -1,47 +1,89 @@
-# Churn Without a Cancel Button
+Churn Without a Cancel Button
 
-Identifying silent churn in a non-contractual business, and
-measuring which customers actually respond to intervention.
+Finding customers who quietly stop buying—and working out which ones are worth spending money on.
 
-## The problem
+The Problem
 
-Subscription businesses know when a customer leaves — they
-cancel. Marketplaces and retailers don't. Customers simply
-stop buying, and the only signal is silence.
+Netflix knows when you leave. You click Cancel, and that moment gets recorded.
 
-This creates two problems with no obvious starting point.
+A shop does not. A food delivery app does not. Customers simply stop coming back one day. Nobody announces it. All you see is silence.
 
-**There is no churn label.** You cannot train a model to
-predict something your data doesn't record. The label has
-to be constructed, and a fixed rule like "90 days inactive"
-fails immediately: a weekly shopper silent for a month is
-at risk, while a quarterly shopper silent for a month is
-behaving normally.
+This creates two major problems.
 
-**You cannot verify that retention spending works.** Customers
-who accept offers tend to be the ones who were already most
-engaged. Comparing them to everyone else measures who signed
-up, not what the offer did.
+1. There Is No Churn Label
 
-## What this project does
+You cannot teach a model to identify something your data never recorded. You first have to build the churn label yourself.
 
-1. **Constructs a churn label** from behaviour, deriving the
-   inactivity threshold from observed return rates and scaling
-   it to each customer's own purchase rhythm.
+A simple rule does not work well.
 
-2. **Segments customers** by shopping behaviour, so the same
-   churn score can be acted on differently depending on who
-   it belongs to.
+Suppose you decide that 90 days without a purchase means the customer has churned:
 
-3. **Measures intervention effect** using a randomised
-   promotional campaign, separating the effect of the offer
-   from the effect of who was already buying.
+A customer who shops every week and has been inactive for one month is clearly at risk, but the rule says they are fine.
 
-## Why it matters
+A customer who normally shops every three months and has been inactive for one month is behaving normally, but the same rule may soon flag them.
 
-Marketplace companies discuss retention constantly and credit
-membership programs with driving it, but the quantified claims
-are correlations — members spend more, members retain longer.
-Members also self-select. This project shows what the answer
-looks like when the treatment is randomised and the effect
-can actually be isolated.
+One cutoff cannot fit every customer.
+
+2. You Cannot Tell Whether Offers Actually Work
+
+You send discounts to customers, and some of them continue buying. It looks like the discount worked.
+
+However, customers who respond to offers are often the same customers who were already buying the most. They may have continued purchasing even without the offer.
+
+In that case, you have not measured what the offer changed. You have only measured who was already loyal.
+
+What This Project Does
+
+1. Builds a Churn Label from Customer Behaviour
+
+Instead of guessing a fixed inactivity cutoff, the project examines the data and asks:
+
+How many customers return after 30 days of inactivity?
+
+How many return after 60 days?
+
+How many return after 90 days?
+
+At some point, almost nobody returns. That point becomes the baseline churn cutoff.
+
+The project then adjusts the cutoff for each customer based on how often they normally purchase.
+
+2. Groups Customers into Behavioural Segments
+
+Customers behave differently:
+
+Some shop weekly and buy in bulk.
+
+Some repeatedly purchase the same product.
+
+Some mainly buy when a discount is available.
+
+Some purchase only occasionally.
+
+Knowing that a customer may leave is not enough. You also need to understand what type of customer they are before deciding what action to take.
+
+3. Measures What an Offer Actually Changes
+
+The project uses data from a real experiment in which:
+
+A promotional message was sent to a randomly selected treatment group.
+
+The message was withheld from a randomly selected control group.
+
+Because assignment was random, the difference between the two groups estimates the true effect of the promotion.
+
+This separates the impact of the offer from the customer's existing likelihood of purchasing.
+
+Why It Matters
+
+Large marketplace companies frequently discuss retention and membership programs. They may report that members spend several times more than non-members.
+
+However, customers do not join membership programs randomly. The people who pay for memberships are often already the platform's heaviest users.
+
+This creates an important question:
+
+How much of the difference comes from the membership program, and how much comes from the type of customer who chose to join?
+
+Simple comparisons between members and non-members cannot answer that question.
+
+This project demonstrates what the analysis looks like when an offer is assigned randomly and its incremental effect can be measured separately from existing customer loyalty.
